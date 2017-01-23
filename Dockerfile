@@ -41,17 +41,20 @@ RUN chmod 755 /sbin/entrypoint.sh
 
 EXPOSE 8080/tcp 8443/tcp
 
-RUN chgrp -R 0 ${REDMINE_HOME}
-RUN chgrp -R 0 ${REDMINE_LOG_DIR}
-RUN chgrp -R 0 ${REDMINE_CACHE_DIR}
-RUN chmod -R g+rw ${REDMINE_LOG_DIR}
-RUN chmod -R g+rw ${REDMINE_HOME}
-RUN chmod -R g+rw ${REDMINE_CACHE_DIR}
-RUN find ${REDMINE_LOG_DIR} -type d -exec chmod g+x {} +
-RUN find ${REDMINE_HOME} -type d -exec chmod g+x {} +
-RUN find ${REDMINE_CACHE_DIR} -type d -exec chmod g+x {} +
+#RUN chgrp -R 0 ${REDMINE_HOME}
+#RUN chgrp -R 0 ${REDMINE_LOG_DIR}
+#RUN chgrp -R 0 ${REDMINE_CACHE_DIR}
+#RUN chmod -R g+rw ${REDMINE_LOG_DIR}
+#RUN chmod -R g+rw ${REDMINE_HOME}
+#RUN chmod -R g+rw ${REDMINE_CACHE_DIR}
+#RUN find ${REDMINE_LOG_DIR} -type d -exec chmod g+x {} +
+#RUN find ${REDMINE_HOME} -type d -exec chmod g+x {} +
+#RUN find ${REDMINE_CACHE_DIR} -type d -exec chmod g+x {} +
 
 VOLUME ["${REDMINE_DATA_DIR}", "${REDMINE_LOG_DIR}"]
 WORKDIR ${REDMINE_INSTALL_DIR}
+RUN chgrp -R 0 ${REDMINE_INSTALL_DIR}
+RUN chmod -R g+rw ${REDMINE_INSTALL_DIR}
+RUN find ${REDMINE_INSTALL_DIR} -type d -exec chmod g+x {} +
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 CMD ["app:start"]
