@@ -56,5 +56,8 @@ WORKDIR ${REDMINE_INSTALL_DIR}
 RUN chgrp -R 0 ${REDMINE_INSTALL_DIR}
 RUN chmod -R g+rw ${REDMINE_INSTALL_DIR}
 RUN find ${REDMINE_INSTALL_DIR} -type d -exec chmod g+x {} +
+RUN chgrp -R 0 /var
+RUN chmod -R g+rw /var 
+RUN find /var -type d -exec chmod g+x {} +
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 CMD ["app:start"]
