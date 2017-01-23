@@ -39,11 +39,7 @@ COPY assets/tools/ /usr/bin/
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
-EXPOSE 8080/tcp 8443/tcp
-
-RUN chgrp -R 0 /
-RUN chmod -R g+rw /
-RUN find / -type d -exec chmod g+x {} +
+EXPOSE 80/tcp 443/tcp
 
 VOLUME ["${REDMINE_DATA_DIR}", "${REDMINE_LOG_DIR}"]
 WORKDIR ${REDMINE_INSTALL_DIR}
